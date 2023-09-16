@@ -11,23 +11,27 @@
 </template>
 
 <script>
-import {mapGetters} from "vuex";
+import {mapGetters, mapActions} from "vuex";
 
 export default {
   name: 'App',
-
+  //Перший варіант getter
   //computed: {
     //allPosts () {
      // return this.$store.getters.allPosts;
     //}
   //},
   computed: mapGetters(["allPosts"]),
+  methods: mapActions(['fetchPosts']),
 
   async mounted() {
     //const res = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=3')
     //const posts = await res.json()
     //this.posts = posts;
-    this.$store.dispatch('fetchPosts')
+
+    //Перший варіант action
+    //this.$store.dispatch('fetchPosts')
+    this.fetchPosts();
   }
 
 }
