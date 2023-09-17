@@ -1,12 +1,15 @@
 export default {
     state: {
         // Ваши состояния (данные)
-        post: []
+        posts: []
     },
     mutations: {
         // Ваши мутации (изменения состояния)
         updatePosts(state, posts) {
             state.posts = posts
+        },
+        createPost(state, newPost){
+            state.posts.unshift(newPost)
         }
     },
     actions: {
@@ -22,6 +25,16 @@ export default {
         // Ваши геттеры (вычисляемые свойства)
         allPosts(state) {
             return state.posts
+        },
+        postsCount(state, getters) {
+            return getters.validPosts.length
+        },
+        validPosts (state) {
+            return state.posts.filter(
+                p => {
+                    return p.title && p.body
+                }
+            )
         }
     },
 }
